@@ -1,0 +1,62 @@
+{% extends 'image_quality/main.html'%}
+{%load static%}
+{% block content %}
+
+
+<div class="header-bar">
+    <!-- <div class="row"> -->
+    <div class="col-lg-3">
+        <img src="{% static 'icon/icon.png'%}" alt="" style=" 
+            width: 160px;">
+    </div>
+    <div>
+        <h1>Food Image Attractiveness</h1>
+    </div>
+    <!-- </div> -->
+</div>
+
+
+<div class="container">
+
+    <h2 style="margin: auto; padding: 20px; text-align: center;">Welcome </h2>
+
+
+
+    <p>Welcome to our study! The aim of this study is to gain insights into how individuals make food choices based on the attractiveness of image associated with the food.
+        This study is part of the PhD research of Ayoub El Majjodi
+        at the University of Bergen, Norway, under supervision of Prof. Dr. Christoph Trattner and Dr. Alain Starke.
+        <br>
+        Please carefully read the procedure followed in this study to give your informed consent for voluntary
+        participation*.
+    </p>
+    <b>Procedure</b>
+    <br>
+    <!-- <p>
+You will be first asked to answer a few questions about your personal characteristics. Then, you are asked to choose a preferred food category, and to disclose your preferences for recipes in terms of their popularity, serving size, 
+cooking time and the number of ingredients.        
+<br> -->
+Initially, you will be inquired about your personal cooking knowledge. Subsequently, you will be presented with a list of recipe pictures, from four different food categories: dessert, salads, pasta and snacks. Your task is to provide a ratings as to what extent you find the food image attractive and provide justification for your ratings, in total you will rate 12 recipes. Finally you answer 4 question regarding you general ratings and judgment.
+
+    </p>
+    <b>Duration</b>
+    <p>The study takes around 8-12 minutes to complete. By clicking the <b>'Start'</b>
+        button, you agree to have read and understood this consent form.</p>
+ 
+
+    <div style="text-align: center;">
+        <a type="button" value="Start" class="btn-lg" href="{% url 'image_quality:personal_info' %}"> Start </a>
+    </div>
+    <hr style="  border: 0; 
+height: 1px; 
+background-image: linear-gradient(to right, #f0f0f0, #00b9ff, #59d941, #f0f0f0);" />
+    <p style="font-size: 14px; padding-top: 10px; padding-bottom: 10px; color: black;"> <i
+            style="color: red;">*</i> 
+            The collected information is used for writing scientific
+             publications and is only reported at the group level. Your personal information 
+             is processed anonymously and it cannot be traced back to you. 
+             For questions about the study, please contact the experimenter, Ayoub El Majjodi: Ayoub.Majjdo@uib.no
+    </p>
+
+</div>
+
+{% endblock%}

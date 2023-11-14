@@ -1,0 +1,451 @@
+{%load static %}
+{% load mathfilters %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Food Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/radio_h_unh.css'%}">
+    <!-- Star field -->
+    <!-- <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script> -->
+
+    <link rel="shortcut icon" href="{% static 'icon/icon.png'%}">
+    </script>
+
+
+
+    <style>
+        body {
+            background-image: linear-gradient(-225deg, #f5c94fbc 0%, #e6cc56 100%);
+            /* background: url("{% static 'back/person_info.jpg' %}") no-repeat center center fixed; */
+            /* -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover; */
+            /* background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%); */
+            font-family: 'Nunito', sans-serif;
+            padding-top: 70px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            padding-bottom: 30px;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+
+
+        }
+
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            width: 97%;
+            max-height: 20%;
+            margin: auto;
+            border-radius: 12px 12px 12px 12px;
+            -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+            background: #fbfbfb;
+            box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+        }
+
+   
+
+        .btn-lg {
+            border-color: #ddba59bc !important;
+            background: #fbfbfb;
+            color: #1f4037;
+            /* padding:15px ; */
+            margin: auto;
+            /* #font-size: 20px; */
+            border: 0.10em solid;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px 8px 8px 8px;
+
+        }
+
+        .btn-lg:hover {
+            background-image: none !important;
+            background-color: #ddba59bc !important;
+            /* background-image: linear-gradient(-225deg, #c8e9da 0%, #bbd8e0 100%); */
+            color: rgb(233, 225, 225);
+
+        }
+
+
+         .btn-lgT {
+            border-color: #ddba59bc !important;
+            background: #fbfbfb;
+            color: #1f4037;
+            /* padding:15px ; */
+            margin: auto;
+            /* #font-size: 20px; */
+            border: 0.2em solid;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px 8px 8px 8px;
+
+        }
+
+        /* .btn-lg:hover {
+            background-image: none !important;
+            background-color: #ddba59bc !important;
+           
+            color: rgb(233, 225, 225);
+
+        } */
+
+
+        .btn {
+            background-color: #ffff;
+            border: 1px solid black;
+            border-radius: 50px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+            color: black;
+            font-size: 16px;
+            padding: 12px 25px;
+            letter-spacing: 1px;
+            margin: auto;
+            /* margin-bottom: 10px; */
+            /* position: fixed; */
+        }
+
+
+
+  
+    
+
+
+
+
+
+        /* ------------------*/
+        @gray-darker: #444444;
+        @gray-dark: #696969;
+        @gray: #999999;
+        @gray-light: #cccccc;
+        @gray-lighter: #ececec;
+        @gray-lightest: lighten(@gray-lighter, 4%);
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+
+
+
+
+
+
+        .cards {
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+            /* height: px; */
+            width: 90%;
+            /* margin: 0; */
+            /* padding: 0; */
+            /* background-color: red; */
+            text-align: center;
+            margin-left: 0.5%;
+            margin-right: 0.5%;
+
+
+
+
+        }
+
+
+
+        .cards__item {
+            display: flex;
+            padding: 1rem;
+            height: 100%;
+            width: 50%;
+
+
+
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.25rem;
+            box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 0.7px solid;
+            width: 100%;
+            height: 700px;
+           
+        }
+
+        .card__content {
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .card__content_2 {
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: row;
+            padding: 1rem;
+        }
+
+
+        .card__image img {
+          /* max-height: 500px; */
+            /* width: 100%; */
+            width: 400px;
+            /* max-width: 500px; */
+            height: 400px;
+            object-fit: contain;
+        
+
+        }
+
+
+
+
+        .card__title {
+            /* color: @gray-dark; */
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            top: 50%;
+            left: 50%;
+            /* transform: translate(-50%, -50%); */
+            /* padding: 10px; */
+        }
+
+  
+    </style>
+
+
+    <!-- <script>
+        document.getElementById("id_f_1-recipe_0").checked = true;
+    </script> -->
+</head>
+
+<body>
+    <div class="flex-column" style="height:100%;">
+        <div style="text-align: -webkit-center;">
+            <h3 style="font-size: 40px;
+        font-weight: 400;
+        line-height: 30px;
+         margin-top: 30px;">Judging Recipe Image Attractiveness </h3>
+            <br>
+            <div >
+                <p style="font-size: Larger;  width: 95%; font-size: 1.5em;">
+                    Presented below are 10 recipes in the food category "Salad". Please, rate each recipe shown below in terms 
+                    visual attractiveness of the associated image (1 star: very unattractive; 7 stars: very attractive). Note that you cannot proceed until all recipes are rated.</p> 
+                    <i> Loading the next page may take a few seconds. </i>
+            </div>
+            <hr style="  border: 0; 
+                height: 1px; 
+                background-image: linear-gradient(to right, #f0f0f0, #00b9ff, #59d941, #f0f0f0);" />
+
+            <!-- <h4>Food Category: <b style="font-size: xx-large;">Salad</b> -->
+            </h4>
+        </div>
+   
+        <form action="" method="POST">
+     {% csrf_token %}
+            <div class="container">
+                <div class="cards">
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_1.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_1.Name}}</div>
+                                <div>Image attractiveness: {{S1_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S1_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!----------------------  2  --------------------->
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_2.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_2.Name}}</div>
+                                <div>Image attractiveness: {{S2_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S2_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!----------------------  3  --------------------->
+                <div class="cards">
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_3.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_3.Name}}</div>
+                                <div>Image attractiveness: {{S3_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S3_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!----------------------  4  --------------------->
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_4.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_4.Name}}</div>
+                                <div>Image attractiveness: {{S4_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S4_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!----------------------  5 --------------------->
+                <div class="cards">
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_5.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_5.Name}}</div>
+                                <div>Image attractiveness: {{S5_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S5_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!----------------------  6  --------------------->
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_6.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_6.Name}}</div>
+                                <div>Image attractiveness: {{S6_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S6_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!----------------------  7 --------------------->
+                <div class="cards">
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_7.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_7.Name}}</div>
+                                <div>Image attractiveness: {{S7_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S7_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!----------------------  8  --------------------->
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_8.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_8.Name}}</div>
+                                <div>Image attractiveness: {{S8_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S8_F.judging}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!----------------------  9 --------------------->
+                <div class="cards">
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_9.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_9.Name}}</div>
+                                <div>Image attractiveness: {{S9_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S9_F.judging}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!----------------------  10  --------------------->
+                    <div class="cards__item">
+                        <div class="card">
+                            <div class="card__image card__image--fence"><img
+                                    src="{% static 'images/recipes/'%}{{s_10.image_link}}" alt="">
+                                <!-- <img src="{% static 'Crispy Cucumbers and Tomatoes in Dill Dressing.jpg'%}" alt=""> -->
+                            </div>
+                            <div class="card__content">
+                                <div class="card__title">{{s_10.Name}}</div>
+                                <div>Image attractiveness: {{S10_F.rating}}</div>
+                                <div style="margin-top: 3px;">{{S10_F.judging}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div style="text-align: center; margin-bottom:40px; margin-top:30px;">
+                    <button type="submit " name="submit" class=" btn-lg col-3"> Next </button>
+                </div>
+        </form>
+    </div>
+
+
+
+
+
+
+</body>
